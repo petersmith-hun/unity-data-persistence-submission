@@ -21,6 +21,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void ShowScoreBoard()
+    {
+        SceneManager.LoadScene("Scenes/scoreboard");
+    }
+
     public void QuitGame()
     {
         #if UNITY_EDITOR
