@@ -48,7 +48,7 @@ public class HighScoreController : MonoBehaviour
     public HighScore GetTopHighScore()
     {
         return highScoreBoard.highScores
-            .First<HighScore>();
+            .FirstOrDefault<HighScore>();
     }
 
     public List<HighScore> GetAllHighScores()

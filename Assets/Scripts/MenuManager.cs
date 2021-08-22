@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private InputField playerNameInputField;
     [SerializeField] private Text validationErrorMessageText;
+    [SerializeField] private TextMeshProUGUI highestScoreText;
+    private HighScoreController highScoreController;
     
     public void StartGame()
     {
@@ -25,6 +28,13 @@ public class MenuManager : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    void Start()
+    {
+        highScoreController = GameObject.Find("HighScore").GetComponent<HighScoreController>();
+
+        DisplayCurrentHighestScore();
     }
 
     private bool SetPlayerName()
@@ -46,5 +56,13 @@ public class MenuManager : MonoBehaviour
     {
         validationErrorMessageText.gameObject.SetActive(false);
         SceneManager.LoadScene("Scenes/main");
+    }
+
+    private void DisplayCurrentHighestScore()
+    {
+        HighScore currentHighestScore = highScoreController.GetTopHighScore();
+        highestScoreText.text = currentHighestScore == null 
+            ? "No best score yet - be the first!" 
+            : $"Best score : {currentHighestScore.playerName} : {currentHighestScore.score}";
     }
 }
