@@ -35,6 +35,8 @@ public class HighScoreBoard
 
 public class HighScoreController : MonoBehaviour
 {
+    private static bool isInitialized = false;
+    
     private int numberOfStoredHighScores = 5;
     private string highScoresFilePath;
     private HighScoreBoard highScoreBoard;
@@ -67,8 +69,17 @@ public class HighScoreController : MonoBehaviour
 
     private void Awake() 
     {
+        if (isInitialized)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         SetHighScoresFilePath();
         LoadHighScores();
+
+        DontDestroyOnLoad(gameObject);
+        isInitialized = true;
     }
 
     private void SetHighScoresFilePath()
