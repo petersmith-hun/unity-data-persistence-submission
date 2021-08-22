@@ -17,11 +17,14 @@ public class MainManager : MonoBehaviour
     private int m_Points;
     
     private bool m_GameOver = false;
-
+    
+    private HighScoreController highScoreController;
     
     // Start is called before the first frame update
     void Start()
     {
+        highScoreController = GameObject.Find("HighScore").GetComponent<HighScoreController>();
+        
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -70,6 +73,7 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        highScoreController.UpdateHighScores(GameSession.instance.playerName, m_Points);
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
