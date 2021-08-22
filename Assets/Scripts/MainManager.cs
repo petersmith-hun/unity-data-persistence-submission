@@ -88,6 +88,11 @@ public class MainManager : MonoBehaviour
         GameOverText.SetActive(true);
     }
 
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Scenes/start");
+    }
+
     void HandleHighScore()
     {
         HighScore currentHighestScore = highScoreController.GetTopHighScore();
